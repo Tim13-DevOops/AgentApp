@@ -14,7 +14,7 @@ then
 fi
 
 coverage run setup.py test
-coverage xml --include="app/*" --omit="app/config.py","app/app.py","*__init__.py" -o coverage_reports/coverage.xml
+coverage xml --include="app/*" -o coverage_reports/coverage.xml
 
 # python setup.py install
 # start_server
