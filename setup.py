@@ -14,6 +14,7 @@ setup(
     install_requires=[
         'flask-restful',
         'flask-cors',
+        'flask-wtf',
         'psycopg2-binary',
         'flask-sqlalchemy',
     ],

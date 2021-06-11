@@ -1,14 +1,16 @@
 from flask import Flask
 from flask_restful import Resource, Api
-from flask_cors import CORS
+from flask_wtf.csrf import CSRFProtect
+import app.config as config
 
 
 from app.repository.database import init_database
 
-
+csrf = CSRFProtect(app)
 app = Flask(__name__)
-app.config['WTF_CSRF_ENABLED'] = True
-CORS(app)
+app.config['SECRET_KEY'] = config.FLASK_SECRET_KEY
+
+csrf.init_app(app)
 
 api = Api(app)
 db = init_database(app)
