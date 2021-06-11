@@ -5,7 +5,9 @@ from flask_cors import CORS
 
 from app.repository.database import init_database
 
+
 app = Flask(__name__)
+app.config['WTF_CSRF_ENABLED'] = True
 CORS(app)
 
 api = Api(app)
