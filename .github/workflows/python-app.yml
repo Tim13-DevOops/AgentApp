@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
@@ -20,6 +19,7 @@ jobs:
         pip install flake8 pytest
         # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
   lint:
+    runs-on: ubuntu-latest
     steps:
     - name: Lint with flake8
       run: |
@@ -28,6 +28,7 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
   test:
+    runs-on: ubuntu-latest
     steps:
     - name: Build container
       run: |
@@ -37,6 +38,7 @@ jobs:
         docker-compose up --exit-code-from devoops
     needs: build
   sonar_cloud:
+    runs-on: ubuntu-latest
     steps:
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
