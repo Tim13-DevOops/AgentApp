@@ -13,7 +13,9 @@ then
     echo "PostgreSQL started"
 fi
 
-python setup.py test
+coverage run setup.py test
+coverage xml --include="app/*" --omit="app/config.py","app/app.py","*__init__.py" -o coverage_reports/coverage.xml
+
 # python setup.py install
 # start_server
 
