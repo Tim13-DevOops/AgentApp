@@ -21,4 +21,5 @@ services:
       - 3000:3000
     depends_on:
       - db
-  
+    volumes:
+    - ./coverage_reports:/work/coverage_reports
