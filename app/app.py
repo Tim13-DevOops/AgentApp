@@ -7,10 +7,10 @@ import app.config as config
 from app.repository.database import init_database
 
 app = Flask(__name__)
-# app.config['SECRET_KEY'] = config.FLASK_SECRET_KEY
+app.config['SECRET_KEY'] = config.FLASK_SECRET_KEY
 
-# csrf = CSRFProtect(app)
-# csrf.init_app(app)
+csrf = CSRFProtect(app)
+csrf.init_app(app)
 
 api = Api(app)
 db = init_database(app)
