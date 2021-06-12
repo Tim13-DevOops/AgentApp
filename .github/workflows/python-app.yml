@@ -29,7 +29,7 @@ jobs:
         docker-compose build
     - name: Run container
       run: |
-        docker-compose up --exit-code-from devoops
+        docker-compose up --exit-code-from server
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
