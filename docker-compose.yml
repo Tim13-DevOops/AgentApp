@@ -8,17 +8,13 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: admin
       POSTGRES_DB: devoops
-    ports:
-      - 5432:5432
 
-  devoops:
+  server:
     build:
       context: .
       dockerfile: Dockerfile
     env_file:
       - ./.env.dev
-    ports:
-      - 3000:3000
     depends_on:
       - db
     volumes:
