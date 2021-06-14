@@ -1,11 +1,11 @@
-name: CI_pipeline
+name: CI_pipeline_pull_request
 
 on:
   pull_request:
     branches: [ main, development ]
 
 jobs:
-  ci_pipeline:
+  ci_pipeline_pull_request:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -29,20 +29,9 @@ jobs:
         docker-compose build
     - name: Run container
       run: |
-        docker-compose up --exit-code-from devoops
+        docker-compose up --exit-code-from server
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    - name: Login to DockerHub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build and push
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: dusanpanda/agent_backend:latest
