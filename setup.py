@@ -15,10 +15,15 @@ setup(
         'flask-restful',
         'flask-cors',
         'flask-wtf',
+        'flask-migrate',
         'psycopg2-binary',
         'flask-sqlalchemy',
     ],
     entry_points={
-        'console_scripts': ['start_server=app.app:main']
+        'console_scripts': 
+            [
+                'start_server=app.app:main',
+                'flask_migrate=app.app:db_migrate'
+            ]
     },
 )

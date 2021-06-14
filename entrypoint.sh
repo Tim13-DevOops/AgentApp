@@ -17,6 +17,7 @@ coverage run setup.py test
 coverage xml --include="app/*" -o coverage_reports/coverage.xml
 
 # python setup.py install
+# flask_migrate
 # start_server
 
 exec "$@"
