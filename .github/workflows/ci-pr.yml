@@ -38,8 +38,8 @@ jobs:
     - name: Docker Build, Tag & Push
       uses: belon/docker-build-push@v4.0
       with:
-        image: hub.docker.com/repository/docker/dusanpanda/agent_backend
-        tags: stage, latest
+        image: dusanpanda/agent_backend
+        tags: v1, latest
         registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
