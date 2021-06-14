@@ -40,7 +40,7 @@ jobs:
       with:
         image: dusanpanda/agent_backend
         tags: stage, latest
-        registry: 
+        registry: docker.io
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
