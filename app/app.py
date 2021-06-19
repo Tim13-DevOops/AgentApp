@@ -19,7 +19,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 csrf = CSRFProtect(app)
 csrf.init_app(app)
 
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "localhost"}})
 
 api = Api(app)
 db = init_database(app)
