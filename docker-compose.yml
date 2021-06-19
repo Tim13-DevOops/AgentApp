@@ -4,10 +4,9 @@ services:
     image: postgres:latest
     container_name: postgres
     restart: always
-    environment:
-      POSTGRES_PASSWORD: admin
-      POSTGRES_USER: admin
-      POSTGRES_DB: devoops
+    env_file:
+      - ./.env.dev
+
 
   server:
     build:
@@ -19,3 +18,4 @@ services:
       - db
     volumes:
     - ./coverage_reports:/work/coverage_reports
+    

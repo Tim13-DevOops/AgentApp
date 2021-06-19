@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from flask_migrate import init as migrate_init
 from flask_migrate import migrate as migrate_migrate
 from flask_migrate import upgrade as migrate_upgrade
+from flask_cors import CORS
 import app.config as config
 
 from app.repository.database import init_database
@@ -14,8 +15,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = config.FLASK_SECRET_KEY
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+
 csrf = CSRFProtect(app)
 csrf.init_app(app)
+
+cors = CORS(app, resources={r"/*": {"origins": "localhost"}})
 
 api = Api(app)
 db = init_database(app)
