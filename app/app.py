@@ -16,19 +16,20 @@ app.config['SECRET_KEY'] = config.FLASK_SECRET_KEY
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-csrf = CSRFProtect(app)
-csrf.init_app(app)
+# csrf = CSRFProtect(app)
+# csrf.init_app(app)
 
 cors = CORS(app, resources={r"/*": {"origins": "localhost"}})
 
 api = Api(app)
 db = init_database(app)
 
-from app.api.product_api import ProductAPI
+from app.api.product_api import ProductAPI, SingleProductAPI
 
 migrate = Migrate(app, db)
 
 api.add_resource(ProductAPI, '/product')
+api.add_resource(SingleProductAPI, '/product/<int:product_id>')
 
 def db_migrate():
     with app.app_context():
