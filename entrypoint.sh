@@ -19,6 +19,7 @@ then
   coverage xml --include="app/*" -o coverage_reports/coverage.xml
 elif [ "$COMMAND" = "run_server" ]
 then
+  python setup.py install
   flask_migrate
   start_server
 fi
