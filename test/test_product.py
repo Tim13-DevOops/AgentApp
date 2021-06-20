@@ -44,6 +44,10 @@ def test_get_product_happy(client):
     assert result.json['availability'] == 5
     assert result.json['deleted'] == False
 
+def test_get_product_sad(client):
+    result = client.get('/product/1389')
+    assert result.status_code == 404
+
 
 def test_create_product_happy(client):
     product = {
@@ -62,6 +66,17 @@ def test_create_product_happy(client):
     assert result.json['id'] != None
 
 
+
+def test_create_product_sad(client):
+    product = {
+        'name': 'TestProduct3',
+        'price': "cheap",
+        'availability': 7
+    }
+
+    result = client.post('/product', data=json.dumps(product), content_type='application/json')
+    assert result.status_code == 500
+
 def test_update_product_happy(client):
     product = {
         'id': 2,
@@ -71,13 +86,24 @@ def test_update_product_happy(client):
     }
 
     result = client.put('/product', data=json.dumps(product), content_type='application/json')
-    print(result.json)
     assert result.json['name'] == product['name']
     assert result.json['price'] == product['price']
     assert result.json['availability'] == product['availability']
     assert result.json['timestamp'] != None
     assert result.json['deleted'] == False
     assert result.json['id'] == product['id']
+
+def test_update_product_sad(client):
+    product = {
+        'id': 1389,
+        'name': 'TestProduct2Updated',
+        'price': 12,
+        'availability': 12
+    }
+    result = client.put('/product', data=json.dumps(product), content_type='application/json')
+    assert result.status_code == 404
+
+
 
 
 def test_delete_product_happy(client):
@@ -86,6 +112,11 @@ def test_delete_product_happy(client):
     assert result.json['id'] == product_id
     assert result.json['deleted'] == True
 
+
+def test_delete_product_sad(client):
+    product_id = 1389
+    result = client.delete(f'/product/{product_id}')
+    assert result.status_code == 404
 
 
 

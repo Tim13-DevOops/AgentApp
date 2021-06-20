@@ -1,6 +1,8 @@
 import os
+import json
 from flask import Flask
-from flask_restful import Resource, Api
+from flask.wrappers import Response
+from flask_restful import  Api
 from flask_wtf.csrf import CSRFProtect
 from flask_migrate import Migrate
 from flask_migrate import init as migrate_init
@@ -30,6 +32,17 @@ migrate = Migrate(app, db)
 
 api.add_resource(ProductAPI, '/product')
 api.add_resource(SingleProductAPI, '/product/<int:product_id>')
+
+@app.errorhandler(Exception)
+def handle_exception(error):
+    response = Response()
+    response.data = json.dumps({
+        "code": 500,
+        "name": 'Internal server error',
+    })
+    response.status_code = 500
+    response.content_type = "application/json"
+    return response
 
 def db_migrate():
     with app.app_context():
