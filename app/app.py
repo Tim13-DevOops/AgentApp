@@ -18,10 +18,7 @@ app.config["SECRET_KEY"] = config.FLASK_SECRET_KEY
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-# csrf = CSRFProtect(app)
-# csrf.init_app(app)
-
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/*": {"origins": "localhost"}})
 
 api = Api(app)
 db = init_database(app)
@@ -58,7 +55,6 @@ def db_migrate():
     with app.app_context():
         if not os.path.exists("./migrations"):
             migrate_init()
-            # os.remove('./migrations')
         migrate_migrate()
         migrate_upgrade()
 
