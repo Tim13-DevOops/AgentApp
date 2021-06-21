@@ -2,6 +2,7 @@ from datetime import datetime
 from .database import db
 from dataclasses import dataclass
 
+
 @dataclass
 class Product(db.Model):
     id: int
@@ -19,4 +20,4 @@ class Product(db.Model):
     deleted = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
-        return f'Product {self.name}'
+        return f"Product {self.name}"
