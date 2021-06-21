@@ -28,6 +28,7 @@ db = init_database(app)
 
 from app.api.product_api import ProductAPI, SingleProductAPI
 from app.api.order_api import OrderAPI, SingleOrderAPI
+from app.api.report_api import ReportSoldAPI, ReportProfitAPI
 
 migrate = Migrate(app, db)
 
@@ -35,6 +36,8 @@ api.add_resource(ProductAPI, "/product")
 api.add_resource(SingleProductAPI, "/product/<int:product_id>")
 api.add_resource(OrderAPI, "/order")
 api.add_resource(SingleOrderAPI, "/order/<int:order_id>")
+api.add_resource(ReportSoldAPI, "/report/sold/<int:n_results>")
+api.add_resource(ReportProfitAPI, "/report/profit/<int:n_results>")
 
 
 @app.errorhandler(Exception)

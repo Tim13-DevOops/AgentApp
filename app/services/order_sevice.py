@@ -3,10 +3,7 @@ from app.repository.order import BuyOrder
 from app.repository.product import Product
 from app.repository.database import db
 from datetime import datetime
-from logging import Logger
 from flask import abort
-
-logger = Logger(__name__)
 
 
 def get_orders():
