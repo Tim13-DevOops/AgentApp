@@ -1,3 +1,19 @@
 {
-    "files.eol": "\n"
+    "files.eol": "\n",
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.testing.pytestEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Path": "/home/dusanpanda/.pyenv/versions/contexta/bin/flake8",
+    "python.linting.flake8Args": [
+        "--max-line-length=80",
+        "--ignore=E402"
+    ],
+    "editor.formatOnSave": true,
+    // The number of spaces a tab is equal to.
+    "editor.tabSize": 4,
+    // Insert spaces when pressing Tab.
+    "editor.insertSpaces": true,
+    // When opening a file, `editor.tabSize` and `editor.insertSpaces` will be detected based on the file contents.
+    "editor.detectIndentation": true
 }
