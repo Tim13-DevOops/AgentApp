@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ProductQuantity } from '../models/product-quantity';
+import { ProductQuantity } from '../models/product-quantity.model';
+import { ProductIdQuantity } from '../models/productId-quantity';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class CartService {
 
   constructor() { }
 
-  
+
   addToCart(productQuantity: ProductQuantity) {
     let cart = this.getCart()
 
@@ -43,4 +44,13 @@ export class CartService {
     let cartString = JSON.stringify(cart)
     localStorage.setItem("cart", cartString)
   }
+
+
+  mapCartToOrder(cart: ProductQuantity[]): ProductIdQuantity[] {
+
+    return cart.map((pq: ProductQuantity) => {
+      return new ProductIdQuantity({ product_id: pq.product.id, quantity: pq.quantity })
+    })
+  }
+
 }

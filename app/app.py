@@ -37,18 +37,18 @@ api.add_resource(ReportSoldAPI, "/report/sold/<int:n_results>")
 api.add_resource(ReportProfitAPI, "/report/profit/<int:n_results>")
 
 
-@app.errorhandler(Exception)
-def handle_exception(error):
-    response = Response()
-    response.data = json.dumps(
-        {
-            "code": 500,
-            "name": "Internal server error",
-        }
-    )
-    response.status_code = 500
-    response.content_type = "application/json"
-    return response
+# @app.errorhandler(Exception)
+# def handle_exception(error):
+#     response = Response()
+#     response.data = json.dumps(
+#         {
+#             "code": 500,
+#             "name": "Internal server error",
+#         }
+#     )
+#     response.status_code = 500
+#     response.content_type = "application/json"
+#     return response
 
 
 def db_migrate():

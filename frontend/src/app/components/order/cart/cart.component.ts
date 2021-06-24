@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductQuantity } from 'src/app/models/product-quantity';
+import { ProductQuantity } from 'src/app/models/product-quantity.model';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -24,13 +24,13 @@ export class CartComponent implements OnInit {
       this.cart.splice(itemIndex, 1)
       this.cartService.saveCart(this.cart)
     }
-    
+
   }
 
-  updateItemQuantity(item, quantity) {
+  updateItemQuantity(item: ProductQuantity, quantity: number) {
     let itemIndex = this.cart.indexOf(item)
     if (itemIndex !== -1) {
-      this.cart[itemIndex].quantity = quantity
+      this.cart[itemIndex].quantity = +quantity
       this.cartService.saveCart(this.cart)
     }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from 'src/app/models/product-model';
-import { ProductQuantity } from 'src/app/models/product-quantity';
+import { Product } from 'src/app/models/product.model';
+import { ProductQuantity } from 'src/app/models/product-quantity.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -18,8 +18,8 @@ export class ProductPageComponent implements OnInit {
   amount = 0
 
   constructor(private route: ActivatedRoute,
-              private service: ProductService,
-              private cartService: CartService) { }
+    private service: ProductService,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(routeParams => {
