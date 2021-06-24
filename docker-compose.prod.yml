@@ -26,15 +26,15 @@ services:
       - apigateway_system_network
 
 
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: ./Dockerfile
-  #   ports:
-  #     - "4200:4200"
-  #     - "9876:9876"
-  #   hostname:
-  #     agent_frontend
-  #   networks:
-  #     - apigateway_system_network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - "4200:4200"
+      - "9876:9876"
+    hostname:
+      agent_frontend
+    networks:
+      - apigateway_system_network
   
