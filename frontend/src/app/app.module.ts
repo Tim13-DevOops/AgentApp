@@ -3,15 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './core/home/home.component';
+import { HomeComponent } from './components/core/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductsComponent } from './products/products.component';
-import { ProductComponent } from './products/product/product.component';
-import { NavBarComponent } from './core/nav-bar/nav-bar.component';
+import { ProductsComponent } from './components/products/products.component';
+import { ProductComponent } from './components/products/product/product.component';
+import { NavBarComponent } from './components/core/nav-bar/nav-bar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AddProductComponent } from './products/add-product/add-product.component';
-import { UpdateProductComponent } from './products/update-product/update-product.component';
+import { AddProductComponent } from './components/products/add-product/add-product.component';
+import { UpdateProductComponent } from './components/products/update-product/update-product.component';
 import { FormsModule } from '@angular/forms';
+import { ProductPageComponent } from './components/products/product-page/product-page.component';
+import { CartComponent } from './components/order/cart/cart.component';
+import { OrderComponent } from './components/order/order.component';
+import { ToastGlobalComponent } from './components/core/toast/toast-global/toast-global.component';
+import { ToastContainer } from './components/core/toast/toast-container/toast-container.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,12 @@ import { FormsModule } from '@angular/forms';
     ProductComponent,
     NavBarComponent,
     AddProductComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    ProductPageComponent,
+    CartComponent,
+    OrderComponent,
+    ToastGlobalComponent,
+    ToastContainer
   ],
   imports: [
     BrowserModule,

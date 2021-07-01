@@ -1,0 +1,31 @@
+<br>
+<br>
+<div class="row">
+    <div class="col-4 offset-2">
+        <div class="card" style="width: 18rem;">
+            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <div class="card-body">
+              <h5 class="card-title">{{product?.name}}</h5>
+                <table class="card-text">
+                    <tr>
+                        <td>Price: </td>
+                        <td>{{ product?.price }}</td>
+                    </tr>
+                    <tr>
+                        <td>Available: </td>
+                        <td>{{ product?.availability ? product.availability : 'No' }}</td>
+                    </tr>
+                </table>
+            </div>
+          </div>
+    </div>
+    <div class="col-4">
+        <form>
+            <div class="form-group">
+                <label for="priceInput">Amount</label>
+                <input type="number" name="priceInputField" class="form-control" id="priceInput" [(ngModel)]="amount">
+            </div>
+            <button class="btn btn-primary"  (click)="addToCart()">Add To Cart</button>
+        </form>
+    </div>
+</div>

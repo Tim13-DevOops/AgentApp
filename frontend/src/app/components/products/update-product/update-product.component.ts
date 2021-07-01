@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Product } from 'src/app/models/product-model';
+import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class UpdateProductComponent implements OnInit {
   product: Product
 
   constructor(private productService: ProductService,
-              public activeModal: NgbActiveModal) { }
+    public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
   }

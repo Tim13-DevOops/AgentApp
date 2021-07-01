@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Product } from 'src/app/models/product-model';
+import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 import { UpdateProductComponent } from '../update-product/update-product.component';
 
@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit {
 
   @Output()
   productsChanged = new EventEmitter<boolean>()
-  
+
   constructor(private modalService: NgbModal, private productService: ProductService) { }
 
   ngOnInit(): void {

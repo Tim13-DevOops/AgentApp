@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Product } from '../models/product-model';
-import { ProductService } from '../services/product.service';
+import { Product } from '../../models/product.model';
+import { ProductService } from '../../services/product.service';
 import { AddProductComponent } from './add-product/add-product.component';
 
 @Component({

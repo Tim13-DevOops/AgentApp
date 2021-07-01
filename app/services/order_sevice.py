@@ -35,18 +35,25 @@ def create_order(order_dict):
         user_phone_number=order_dict["user_phone_number"],
     )
     order.timestamp = datetime.now()
-    for product_id, quantity in order_dict.get("products", []):
+    for productIdQuantity in order_dict.get("products", []):
+        product_id = productIdQuantity.get("product_id", None)
+        quantity = productIdQuantity.get("quantity", 0)
+
+        if product_id == None:
+            abort(400, f"Invalid product id {product_id}")
+
         product_query = Product.query.filter_by(id=product_id)
         product = product_query.first()
+
+        if product.deleted:
+            db.session.rollback()
+            abort(400, f"Product {product.name} no longer available")
+
         if product.availability < quantity:
             db.session.rollback()
             abort(400, f"not enough {product.name} in stock")
-        product_query.update(
-            {"availability": (Product.availability - quantity)}
-        )
-        order_product = OrderProduct(
-            order=order, product=product, quantity=quantity
-        )
+        product_query.update({"availability": (Product.availability - quantity)})
+        order_product = OrderProduct(order=order, product=product, quantity=quantity)
         order_product.timestamp = datetime.now()
         order.products.append(order_product)
     db.session.add(order)
