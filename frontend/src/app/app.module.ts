@@ -17,6 +17,7 @@ import { CartComponent } from './components/order/cart/cart.component';
 import { OrderComponent } from './components/order/order.component';
 import { ToastGlobalComponent } from './components/core/toast/toast-global/toast-global.component';
 import { ToastContainer } from './components/core/toast/toast-container/toast-container.component';
+import { LoginComponent } from './core/login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ToastContainer } from './components/core/toast/toast-container/toast-co
     CartComponent,
     OrderComponent,
     ToastGlobalComponent,
-    ToastContainer
+    ToastContainer,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
