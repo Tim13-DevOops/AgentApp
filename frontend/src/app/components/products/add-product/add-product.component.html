@@ -1,0 +1,18 @@
+<div class="row">
+    <app-image-upload (imageId)="imageUploaded($event)"></app-image-upload>
+</div>
+<form>
+    <div class="form-group">
+        <label for="nameInput">Name</label>
+        <input type="text" name="nameInputField" class="form-control" id="nameInput" placeholder="Enter product name" [(ngModel)]="product.name">
+    </div>
+    <div class="form-group">
+        <label for="priceInput">Price</label>
+        <input type="number" name="priceInputField" class="form-control" id="priceInput" [(ngModel)]="product.price">
+    </div>
+    <div class="form-group">
+        <label for="availabilityInput">Availability</label>
+        <input type="number" name="availabilityInputField" class="form-control" id="availabilityInput" [(ngModel)]="product.availability">
+    </div>
+    <button class="btn btn-primary"  (click)="postProduct()">Submit</button>
+</form>
