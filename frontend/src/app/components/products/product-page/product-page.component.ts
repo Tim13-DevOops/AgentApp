@@ -4,6 +4,8 @@ import { Product } from 'src/app/models/product.model';
 import { ProductQuantity } from 'src/app/models/product-quantity.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { environment } from 'src/environments/environment';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-product-page',
@@ -15,11 +17,14 @@ export class ProductPageComponent implements OnInit {
   product_id: number
   product: Product
 
+  images_url = environment.images_url;
+
   amount = 0
 
   constructor(private route: ActivatedRoute,
     private service: ProductService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private toastService: ToastService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(routeParams => {
@@ -36,7 +41,7 @@ export class ProductPageComponent implements OnInit {
 
   addToCart() {
     if (this.amount <= 0) {
-      alert("Amount must be greater than 0")
+      this.toastService.show("Amount must be greater than 0.", { classnmae: 'bg-danger text-light', delay: 5000 })
       return
     }
 
