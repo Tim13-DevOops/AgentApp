@@ -6,6 +6,10 @@
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
             <div class="card-body">
               <h5 class="card-title">{{product?.name}}</h5>
+              <div class="card-text">
+                <div class="row">
+                  <img [src]="images_url + '/image/' + product.image" width="100%">
+                </div>
                 <table class="card-text">
                     <tr>
                         <td>Price: </td>
@@ -16,6 +20,8 @@
                         <td>{{ product?.availability ? product.availability : 'No' }}</td>
                     </tr>
                 </table>
+                  
+              </div>
             </div>
           </div>
     </div>

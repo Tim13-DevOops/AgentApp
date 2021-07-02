@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
+import { environment } from 'src/environments/environment';
 import { UpdateProductComponent } from '../update-product/update-product.component';
 
 @Component({
@@ -13,6 +14,8 @@ export class ProductComponent implements OnInit {
 
   @Input()
   product: Product
+
+  images_url = environment.images_url;
 
   @Output()
   productsChanged = new EventEmitter<boolean>()

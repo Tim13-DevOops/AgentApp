@@ -18,6 +18,7 @@ import { OrderComponent } from './components/order/order.component';
 import { ToastGlobalComponent } from './components/core/toast/toast-global/toast-global.component';
 import { ToastContainer } from './components/core/toast/toast-container/toast-container.component';
 import { LoginComponent } from './core/login/login.component';
+import { ImageUploadComponent } from './components/products/add-product/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LoginComponent } from './core/login/login.component';
     OrderComponent,
     ToastGlobalComponent,
     ToastContainer,
-    LoginComponent
+    LoginComponent,
+    ImageUploadComponent,
   ],
   imports: [
     BrowserModule,

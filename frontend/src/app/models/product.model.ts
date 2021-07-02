@@ -6,6 +6,7 @@ export class Product {
     name: string;
     price: number;
     availability: number;
+    image: string;
 
     constructor(obj?: any) {
         this.id = obj && obj.id || null;
@@ -13,5 +14,6 @@ export class Product {
         this.name = obj && obj.name || '';
         this.price = obj && obj.price || '';
         this.availability = obj && obj.availability || 0;
+        this.image = obj && obj.image || '';
     }
 }
