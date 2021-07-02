@@ -22,10 +22,18 @@ export class AddProductComponent implements OnInit {
   }
 
   postProduct() {
+    if (!this.product.image) {
+      this.toastService.show("Please add an image", { classnmae: 'bg-danger text-light', delay: 5000 })
+      return
+    }
     this.productService.post(this.product).subscribe(result => {
       this.toastService.show("Product added", { classnmae: 'bg-success text-light', delay: 5000 })
       this.activeModal.close()
     })
+  }
+
+  imageUploaded(imageId: string) {
+    this.product.image = imageId
   }
 
 }

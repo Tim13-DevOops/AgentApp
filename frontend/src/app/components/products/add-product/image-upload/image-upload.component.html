@@ -1,0 +1,23 @@
+<div class="text-center">
+    <input class="form-control" type="file" 
+            (change)="onChange($event)">
+  
+    <button (click)="onUpload()" 
+        class="btn btn-success">
+        Upload
+    </button>
+</div>
+  
+<!-- Shareable short link of  uoloaded file -->
+<div class="container text-center jumbotron"
+    *ngIf="shortLink">
+    <h2> Your image</h2>
+    <img *ngIf="shortLink" src="http://localhost:8000/image_service/image/{{shortLink}}" width="100%">
+    <br>
+    {{shortLink}}
+</div> 
+  
+<!--Flag variable is used here-->
+<div class="container" *ngIf="loading">
+    <h3>Loading ...</h3>
+</div>

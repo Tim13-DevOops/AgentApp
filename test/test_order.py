@@ -15,6 +15,7 @@ def populate_db():
         price=5,
         timestamp=datetime(2000, 5, 5, 5, 5, 5, 5),
         availability=5,
+        image="image1.jpg",
     )
     db.session.add(product1)
 
@@ -23,6 +24,7 @@ def populate_db():
         price=6,
         timestamp=datetime(2006, 6, 6, 6, 6, 6, 6),
         availability=6,
+        image="image2.jpg",
     )
     db.session.add(product2)
 
@@ -109,7 +111,16 @@ def test_create_order_happy(client):
         "user_email": "TestEmail3",
         "user_address": "TestAddress3",
         "user_phone_number": "TestPhoneNumber3",
-        "products": [(1, 3), (2, 2)],
+        "products": [
+            {
+                "product_id": 1,
+                "quantity": 3,
+            },
+            {
+                "product_id": 2,
+                "quantity": 2,
+            },
+        ],
     }
 
     result = client.post(
@@ -134,7 +145,12 @@ def test_create_order_sad(client):
         "user_email": "TestEmail3",
         "user_address": "TestAddress3",
         "user_phone_number": "TestPhoneNumber3",
-        "products": [(1, 1000)],
+        "products": [
+            {
+                "product_id": 1,
+                "quantity": 10000,
+            }
+        ],
     }
 
     result = client.post(

@@ -45,6 +45,9 @@ def create_order(order_dict):
         product_query = Product.query.filter_by(id=product_id)
         product = product_query.first()
 
+        if product == None:
+            abort(400, f"Product with id {product_id} does not exist")
+
         if product.deleted:
             db.session.rollback()
             abort(400, f"Product {product.name} no longer available")
