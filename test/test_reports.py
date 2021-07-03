@@ -5,6 +5,7 @@ from app.repository.order import BuyOrder
 from app.repository.order_product import OrderProduct
 from app.repository.database import db
 from datetime import datetime
+from test.tokens import agent_token
 
 import logging
 
@@ -23,6 +24,7 @@ def product1(timestamp):
         price=100,
         timestamp=timestamp,
         availability=100,
+        agent_id=2,
     )
 
 
@@ -33,6 +35,7 @@ def product2(timestamp):
         price=175,
         timestamp=timestamp,
         availability=100,
+        agent_id=2,
     )
 
 
@@ -104,7 +107,9 @@ def client(product1, product2, order1, order2):
 
 def test_report_sold_units_happy(client, product2):
     # first check whether the report is correct with the initial state
-    result = client.get("/report/sold/2")
+    result = client.get(
+        "/report/sold/2", headers={"Authorization": "Bearer " + agent_token}
+    )
     assert isinstance(result.json, list)
     assert len(result.json) == 2
     assert result.json[0]["product_name"] == "TestProduct1"
@@ -126,7 +131,9 @@ def test_report_sold_units_happy(client, product2):
     db.session.add(order)
     db.session.commit()
 
-    result = client.get("/report/sold/2")
+    result = client.get(
+        "/report/sold/2", headers={"Authorization": "Bearer " + agent_token}
+    )
     assert isinstance(result.json, list)
     assert len(result.json) == 2
     assert result.json[0]["product_name"] == "TestProduct2"
@@ -137,7 +144,9 @@ def test_report_sold_units_happy(client, product2):
 
 def test_report_profit_happy(client, product1):
     # first check whether the report is correct with the initial state
-    result = client.get("/report/profit/2")
+    result = client.get(
+        "/report/profit/2", headers={"Authorization": "Bearer " + agent_token}
+    )
     assert isinstance(result.json, list)
     assert len(result.json) == 2
     assert result.json[0]["product_name"] == "TestProduct2"
@@ -159,7 +168,9 @@ def test_report_profit_happy(client, product1):
     db.session.add(order)
     db.session.commit()
 
-    result = client.get("/report/profit/2")
+    result = client.get(
+        "/report/profit/2", headers={"Authorization": "Bearer " + agent_token}
+    )
     assert isinstance(result.json, list)
     assert len(result.json) == 2
     assert result.json[0]["product_name"] == "TestProduct1"

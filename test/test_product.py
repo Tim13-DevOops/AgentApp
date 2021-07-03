@@ -5,6 +5,7 @@ from app.repository.product import Product
 from app.repository.database import db
 from datetime import datetime
 from flask import jsonify
+from test.tokens import agent_token
 
 
 def populate_db():
@@ -15,6 +16,7 @@ def populate_db():
         timestamp=datetime(2000, 5, 5, 5, 5, 5, 5),
         availability=5,
         image="image1.jpg",
+        agent_id=2,
     )
     db.session.add(product)
     db.session.commit()
@@ -25,6 +27,7 @@ def populate_db():
         timestamp=datetime(2006, 6, 6, 6, 6, 6, 6),
         availability=6,
         image="image1.jpg",
+        agent_id=2,
     )
     db.session.add(product)
     db.session.commit()
@@ -75,7 +78,10 @@ def test_create_product_happy(client):
     }
 
     result = client.post(
-        "/product", data=json.dumps(product), content_type="application/json"
+        "/product",
+        data=json.dumps(product),
+        content_type="application/json",
+        headers={"Authorization": "Bearer " + agent_token},
     )
     print(result.json)
     assert result.json["name"] == product["name"]
@@ -91,7 +97,10 @@ def test_create_product_sad(client):
     product = {"name": "TestProduct3", "price": "cheap", "availability": 7}
 
     result = client.post(
-        "/product", data=json.dumps(product), content_type="application/json"
+        "/product",
+        data=json.dumps(product),
+        content_type="application/json",
+        headers={"Authorization": "Bearer " + agent_token},
     )
     assert result.status_code == 500
 
@@ -106,7 +115,10 @@ def test_update_product_happy(client):
     }
 
     result = client.put(
-        "/product", data=json.dumps(product), content_type="application/json"
+        "/product",
+        data=json.dumps(product),
+        content_type="application/json",
+        headers={"Authorization": "Bearer " + agent_token},
     )
     assert result.json["name"] == product["name"]
     assert result.json["price"] == product["price"]
@@ -125,19 +137,26 @@ def test_update_product_sad(client):
         "availability": 12,
     }
     result = client.put(
-        "/product", data=json.dumps(product), content_type="application/json"
+        "/product",
+        data=json.dumps(product),
+        content_type="application/json",
+        headers={"Authorization": "Bearer " + agent_token},
     )
     assert result.status_code == 404
 
 
 def test_delete_product_happy(client):
     product_id = 1
-    result = client.delete(f"/product/{product_id}")
+    result = client.delete(
+        f"/product/{product_id}", headers={"Authorization": "Bearer " + agent_token}
+    )
     assert result.json["id"] == product_id
     assert result.json["deleted"] == True
 
 
 def test_delete_product_sad(client):
     product_id = 1389
-    result = client.delete(f"/product/{product_id}")
+    result = client.delete(
+        f"/product/{product_id}", headers={"Authorization": "Bearer " + agent_token}
+    )
     assert result.status_code == 404
