@@ -3,6 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
 import { AddProductComponent } from './add-product/add-product.component';
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -13,10 +15,16 @@ export class ProductsComponent implements OnInit {
 
   products: Product[];
 
-  constructor(private productService: ProductService, private modalService: NgbModal) { }
+  user: any = undefined;
+
+  iconAdd = faPlus;
+
+  constructor(private productService: ProductService, private modalService: NgbModal, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getProducts()
+    this.user = this.authService.getUser();
+
   }
 
   getProducts() {

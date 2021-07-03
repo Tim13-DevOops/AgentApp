@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask.wrappers import Response
 from flask_restful import Api
 from flask_migrate import Migrate
@@ -14,14 +14,18 @@ import json
 from app.repository.database import init_database
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = config.FLASK_SECRET_KEY
+app.config["SECRET_KEY"] = config.SECRET_KEY
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
-cors = CORS(app, resources={r"/*": {"origins": "localhost"}})
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 api = Api(app)
 db = init_database(app)
+
+from app.rbac import rbac
+
+rbac.setJWTManager(app)
 
 from app.api.product_api import ProductAPI, SingleProductAPI
 from app.api.order_api import OrderAPI, SingleOrderAPI
@@ -41,10 +45,7 @@ api.add_resource(ReportProfitAPI, "/report/profit/<int:n_results>")
 def handle_exception(error):
     response = Response()
     response.data = json.dumps(
-        {
-            "code": 500,
-            "name": "Internal server error",
-        }
+        {"code": 500, "name": "Internal server error", "message": f"{error}"}
     )
     response.status_code = 500
     response.content_type = "application/json"

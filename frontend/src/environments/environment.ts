@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   api_url: "http://localhost:8000/agent_backend",
-  images_url: "http://localhost:8000/image_service"
+  images_url: "http://localhost:8000/image_service",
+  auth_url: "http://localhost:8000/authentication"
 };
 
 /*

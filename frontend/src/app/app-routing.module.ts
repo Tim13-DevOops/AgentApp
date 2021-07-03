@@ -4,7 +4,7 @@ import { HomeComponent } from './components/core/home/home.component';
 import { ProductPageComponent } from './components/products/product-page/product-page.component';
 import { ProductsComponent } from './components/products/products.component';
 import { OrderComponent } from './components/order/order.component';
-import { LoginComponent } from './core/login/login.component';
+import { LoginComponent } from './components/core/login/login.component';
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },

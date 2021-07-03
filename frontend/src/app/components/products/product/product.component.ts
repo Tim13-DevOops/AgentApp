@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from 'src/app/models/product.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 import { environment } from 'src/environments/environment';
 import { UpdateProductComponent } from '../update-product/update-product.component';
@@ -15,14 +16,18 @@ export class ProductComponent implements OnInit {
   @Input()
   product: Product
 
+  user: any = undefined;
+
   images_url = environment.images_url;
 
   @Output()
   productsChanged = new EventEmitter<boolean>()
 
-  constructor(private modalService: NgbModal, private productService: ProductService) { }
+  constructor(private modalService: NgbModal, private productService: ProductService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.user = this.authService.getUser()
   }
 
   openEditDialog() {
