@@ -5,6 +5,7 @@ import { ProductService } from '../../services/product.service';
 import { AddProductComponent } from './add-product/add-product.component';
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,7 @@ export class ProductsComponent implements OnInit {
 
   iconAdd = faPlus;
 
-  constructor(private productService: ProductService, private modalService: NgbModal, private authService: AuthService) { }
+  constructor(private productService: ProductService, private modalService: NgbModal, private authService: AuthService, private toastService: ToastService) { }
 
   ngOnInit(): void {
     this.getProducts()
@@ -31,7 +32,7 @@ export class ProductsComponent implements OnInit {
     this.productService.get().subscribe(data => {
       this.products = data
     }, err => {
-      alert(err)
+      this.toastService.show(`${err.code} ${err.message}`, { classname: 'bg-danger text-light', delay: 5000 })
     })
   }
 
