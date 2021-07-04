@@ -14,12 +14,13 @@ setup(
     install_requires=[
         "flask-restful",
         "flask-cors",
-        "flask-wtf",
         "flask-migrate",
         "psycopg2-binary",
         "flask-sqlalchemy",
+        "prometheus-flask-exporter",
         "flask-jwt-extended",
         "bcrypt",
+        "flask",
     ],
     entry_points={
         "console_scripts": [
