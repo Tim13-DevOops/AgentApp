@@ -1,10 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ImageUploadService } from 'src/app/services/image-upload.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
-  selector: 'app-image-upload',
-  templateUrl: './image-upload.component.html',
-  styleUrls: ['./image-upload.component.css']
+    selector: 'app-image-upload',
+    templateUrl: './image-upload.component.html',
+    styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent implements OnInit {
 
@@ -15,18 +16,18 @@ export class ImageUploadComponent implements OnInit {
 
     @Output()
     imageId = new EventEmitter<string>()
-  
+
     // Inject service 
-    constructor(private fileUploadService: ImageUploadService) { }
-  
+    constructor(private fileUploadService: ImageUploadService, private toastService: ToastService) { }
+
     ngOnInit(): void {
     }
-  
+
     // On file Select
     onChange(event) {
         this.file = event.target.files[0];
     }
-  
+
     // OnClick of button Upload
     onUpload() {
         this.loading = true;
@@ -37,7 +38,9 @@ export class ImageUploadComponent implements OnInit {
                 this.loading = false;
                 this.imageId.emit(name);
             }
-        , err => alert(JSON.stringify(err)));
+            , err => {
+                this.toastService.show(`${err.code} ${err.message}`, { classname: 'bg-danger text-light', delay: 5000 })
+            });
     }
 
 }

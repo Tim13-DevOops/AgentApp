@@ -12,7 +12,7 @@ from app.custom_api import CustomApi
 from app.repository.database import init_database
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = config.FLASK_SECRET_KEY
+app.config["SECRET_KEY"] = config.SECRET_KEY
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
@@ -21,6 +21,10 @@ cors = CORS(app, resources={r"/*": {"origins": "localhost"}})
 api = CustomApi(app)
 db = init_database(app)
 metrics = RESTfulPrometheusMetrics(app, api)
+
+from app.rbac import rbac
+
+rbac.setJWTManager(app)
 
 from app.api.product_api import ProductAPI, SingleProductAPI
 from app.api.order_api import OrderAPI, SingleOrderAPI

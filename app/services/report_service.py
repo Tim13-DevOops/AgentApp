@@ -1,3 +1,4 @@
+from app.rbac.rbac import get_current_user
 from app.repository.product import Product
 from app.repository.order_product import OrderProduct
 from app.repository.database import db
@@ -9,15 +10,15 @@ logger = logging.Logger(__name__)
 
 
 def get_most_sold_products(n_results):
+    user = get_current_user()
     result = (
         db.session.query(
             Product.id,
             Product.name,
-            func.coalesce(func.sum(OrderProduct.quantity), 0).label(
-                "total_sold"
-            ),
+            func.coalesce(func.sum(OrderProduct.quantity), 0).label("total_sold"),
         )
         .select_from(Product)
+        .filter(Product.agent_id == user.id)
         .join(OrderProduct, Product.id == OrderProduct.product_id, isouter=True)
         .group_by(Product.id)
         .order_by(desc("total_sold"))
@@ -33,17 +34,17 @@ def get_most_sold_products(n_results):
 
 
 def get_most_profitable_products(n_results):
+    user = get_current_user()
     result = (
         db.session.query(
             Product.id,
             Product.name,
-            (
-                func.coalesce(
-                    func.sum(OrderProduct.quantity) * Product.price, 0
-                )
-            ).label("total_profit"),
+            (func.coalesce(func.sum(OrderProduct.quantity) * Product.price, 0)).label(
+                "total_profit"
+            ),
         )
         .select_from(Product)
+        .filter(Product.agent_id == user.id)
         .join(OrderProduct, Product.id == OrderProduct.product_id, isouter=True)
         .group_by(Product.id)
         .order_by(desc("total_profit"))

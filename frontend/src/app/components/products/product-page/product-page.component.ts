@@ -36,6 +36,8 @@ export class ProductPageComponent implements OnInit {
   getProduct(): void {
     this.service.getOne(this.product_id).subscribe(product => {
       this.product = product;
+    }, err => {
+      this.toastService.show(`${err.code} ${err.message}`, { classname: 'bg-danger text-light', delay: 5000 })
     })
   }
 
