@@ -21,8 +21,8 @@
       </table>
 
     </div>
-    <a [routerLink]="['/product', product.id]" class="btn btn-primary">Order</a>
-    <a class="btn btn-primary" (click)="openEditDialog()">Edit</a>
-    <a class="btn btn-primary" (click)="deleteProduct()">Delete</a>
+    <a *ngIf="!user" [routerLink]="['/product', product.id]" class="btn btn-primary">Order</a>
+    <a *ngIf="user" class="btn btn-primary" (click)="openEditDialog()">Edit</a>
+    <a *ngIf="user" class="btn btn-primary" (click)="deleteProduct()">Delete</a>
   </div>
 </div>

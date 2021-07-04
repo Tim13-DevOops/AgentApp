@@ -6,6 +6,7 @@ from app.repository.order_product import OrderProduct
 from app.repository.database import db
 import json
 from datetime import datetime
+from test.tokens import agent_token
 
 
 def populate_db():
@@ -16,6 +17,7 @@ def populate_db():
         timestamp=datetime(2000, 5, 5, 5, 5, 5, 5),
         availability=5,
         image="image1.jpg",
+        agent_id=2,
     )
     db.session.add(product1)
 
@@ -25,6 +27,7 @@ def populate_db():
         timestamp=datetime(2006, 6, 6, 6, 6, 6, 6),
         availability=6,
         image="image2.jpg",
+        agent_id=2,
     )
     db.session.add(product2)
 
@@ -84,12 +87,12 @@ def client():
 
 
 def test_get_orders_happy(client):
-    result = client.get("/order")
+    result = client.get("/order", headers={"Authorization": "Bearer " + agent_token})
     assert len(result.json) == 2
 
 
 def test_get_order_happy(client):
-    result = client.get("/order/1")
+    result = client.get("/order/1", headers={"Authorization": "Bearer " + agent_token})
     assert result.json["user_name"] == "TestName1"
     assert result.json["user_surname"] == "TestSurname1"
     assert result.json["user_email"] == "TestEmail1"
@@ -100,7 +103,9 @@ def test_get_order_happy(client):
 
 
 def test_get_order_sad(client):
-    result = client.get("/order/1389")
+    result = client.get(
+        "/order/1389", headers={"Authorization": "Bearer " + agent_token}
+    )
     assert result.status_code == 404
 
 
