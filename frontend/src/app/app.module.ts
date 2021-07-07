@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/core/home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductComponent } from './components/products/product/product.component';
 import { NavBarComponent } from './components/core/nav-bar/nav-bar.component';
@@ -18,6 +18,9 @@ import { OrderComponent } from './components/order/order.component';
 import { ToastGlobalComponent } from './components/core/toast/toast-global/toast-global.component';
 import { ToastContainer } from './components/core/toast/toast-container/toast-container.component';
 import { ImageUploadComponent } from './components/products/add-product/image-upload/image-upload.component';
+import { LoginComponent } from './components/core/login/login.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { ImageUploadComponent } from './components/products/add-product/image-up
     OrderComponent,
     ToastGlobalComponent,
     ToastContainer,
+    LoginComponent,
     ImageUploadComponent,
   ],
   imports: [
@@ -40,9 +44,10 @@ import { ImageUploadComponent } from './components/products/add-product/image-up
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

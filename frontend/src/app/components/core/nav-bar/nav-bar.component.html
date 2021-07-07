@@ -1,19 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/products']">Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"[routerLink]="['/cart']">Cart</a>
-        </li>
-        <li class="nav-item ml-auto">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light col-12">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav col-12">
+      <li class="nav-item">
+        <a class="nav-link ms-2" [routerLink]="['/products']">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link ms-2" [routerLink]="['/cart']">Cart</a>
+      </li>
+      <li *ngIf="!user" class="nav-item ms-auto">
+        <a class="nav-link me-2" [routerLink]="['/login']">Login</a>
+      </li>
+      <li *ngIf="user" class="nav-item ms-auto">
+        <a class="nav-link me-2" [routerLink]="" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
