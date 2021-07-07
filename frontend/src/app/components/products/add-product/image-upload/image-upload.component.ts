@@ -27,7 +27,6 @@ export class ImageUploadComponent implements OnInit {
     onChange(event) {
         this.file = event.target.files[0];
     }
-
     // OnClick of button Upload
     onUpload() {
         this.loading = true;
