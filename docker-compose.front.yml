@@ -1,0 +1,18 @@
+version: "3.8"
+
+networks:
+    apigateway_system_network:
+      external: true
+      
+services:
+    frontend:
+        build:
+          context: ./frontend
+          dockerfile: ./Dockerfile
+        ports:
+          - "4200:4200"
+          - "9877:9876"
+        hostname:
+          agent_frontend
+        networks:
+          - apigateway_system_network
