@@ -26,4 +26,4 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Deploy to production env on Heroku
-      run: ./deploy.sh ${{ steps.release_version.outputs.release }} dusanmilunovic17@gmail.com ${{secrets.HEROKU_API_KEY_PROD}} prod-agent-backend-postgres ${{secrets.SQL_PASSWORD_PROD}} ${{secrets.FLASK_SECRET_KEY}} aoptzkmb aoptzkmb prod
+      run: ./deploy.sh ${{ steps.release_version.outputs.release }} dusanmilunovic17@gmail.com ${{ secrets.HEROKU_API_KEY_PROD }} prod-agent-backend-postgres ${{ secrets.SQL_PASSWORD_PROD }} ${{ secrets.FLASK_SECRET_KEY }} aoptzkmb aoptzkmb ${{ secrets.JWT_SECRET_KEY }} prod 

@@ -67,6 +67,13 @@ variable "postgres_db" {
   description = "Name of postgres database"
 }
 
+variable jwt_secret_key {
+  description = "Secret key for jwt"
+} 
+
+variable debug_metrics {
+  description = "Environment variable used by Prometheus"
+} 
 
 ## backend
 resource "heroku_app" "agent-backend" {
@@ -88,6 +95,8 @@ resource "heroku_app" "agent-backend" {
     POSTGRES_PASSWORD = var.postgres_password
     POSTGRES_USER = var.postgres_user
     POSTGRES_DB = var.postgres_db
+    JWT_SECRET_KEY = var.jwt_secret_key
+    DEBUG_METRICS = var.debug_metrics
   }
 }
 

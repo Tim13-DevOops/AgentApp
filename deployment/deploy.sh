@@ -34,4 +34,6 @@ terraform apply -auto-approve -var stage=${STAGE} \
                               -var postgres_password=${POSTGRES_PASSWORD} \
                               -var postgres_user=${POSTGRES_USER} \
                               -var postgres_db=${POSTGRES_DB} \
+                              -var jwt_secret_key=${JWT_SECRET_KEY} \
+                              -var debug_metrics=${DEBUG_METRICS} \
                               

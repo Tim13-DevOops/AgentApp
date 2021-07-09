@@ -9,10 +9,11 @@ SQL_PASSWORD=${5}
 FLASK_SECRET_KEY=${6}
 SQL_DB_NAME=${7}
 SQL_USERNAME=${8}
+JWT_SECRET_KEY=${9}
 
-STAGE=${9-stage}
-DOCKERHUB_USERNAME=${10:-dusanpanda}
-CONTAINER_NAME=${11:-terraform-deploy}
+STAGE=${10-stage}
+DOCKERHUB_USERNAME=${11:-dusanpanda}
+CONTAINER_NAME=${12:-terraform-deploy}
 
 FLASK_APP=project/__init__.py
 FLASK_ENV=development
@@ -23,6 +24,7 @@ COMMAND=run_server
 POSTGRES_PASSWORD=${SQL_PASSWORD}
 POSTGRES_USER=${SQL_USERNAME}
 POSTGRES_DB=${SQL_DB_NAME}
+DEBUG_METRICS=False
 
 BACKEND_IMAGE=${DOCKERHUB_USERNAME}/agent_backend:${VERSION}
 
@@ -47,6 +49,8 @@ docker create \
   --env POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" \
   --env POSTGRES_USER="${POSTGRES_USER}" \
   --env POSTGRES_DB="${POSTGRES_DB}" \
+  --env JWT_SECRET_KEY="${JWT_SECRET_KEY}" \
+  --env DEBUG_METRICS="${DEBUG_METRICS}" \
   --name "${CONTAINER_NAME}" \
   danijelradakovic/heroku-terraform \
   deploy.sh
