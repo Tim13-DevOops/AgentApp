@@ -26,4 +26,4 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Deploy to staging env on Heroku
-      run: ./deploy.sh ${{ steps.release_version.outputs.release }} dusanpanda@gmail.com ${{ secrets.HEROKU_API_KEY_STAGE }} stage-agent-backend-postgres ${{ secrets.SQL_PASSWORD_STAGE }} ${{ secrets.FLASK_SECRET_KEY }} dfthxqat dfthxqat stage
+      run: ./deploy.sh ${{ steps.release_version.outputs.release }} dusanpanda@gmail.com ${{ secrets.HEROKU_API_KEY_STAGE }} stage-agent-backend-postgres ${{ secrets.SQL_PASSWORD_STAGE }} ${{ secrets.FLASK_SECRET_KEY }} dfthxqat dfthxqat ${{ secrets.JWT_SECRET_KEY }} stage
